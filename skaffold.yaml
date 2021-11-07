@@ -5,6 +5,7 @@ deploy:
     manifests:
       - ./infra/k8s/*
       - ./infra/k8s-dev/*
+<<<<<<< HEAD
 # build:
 #   local:
 #     push: false
@@ -57,3 +58,57 @@ deploy:
 #         manual:
 #           - src: 'src/**/*.ts'
 #             dest: .
+=======
+build:
+  local:
+    push: false
+  artifacts:
+    - image: gcr.io/ticketing-devops-hamill/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: gcr.io/ticketing-devops-hamill/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: gcr.io/ticketing-devops-hamill/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: gcr.io/ticketing-devops-hamill/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: gcr.io/ticketing-devops-hamill/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: gcr.io/ticketing-devops-hamill/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+>>>>>>> f9b093e4ec19338603e0979dad38e5bca40532ca
