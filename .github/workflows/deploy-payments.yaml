@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      # - 'payments/**'
+      - 'payments/**'
 
 env:
   IMAGE: payments
