@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'expiration/**'
+      # - 'expiration/**'
 
 env:
   IMAGE: expiration
