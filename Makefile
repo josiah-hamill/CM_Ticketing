@@ -18,15 +18,15 @@ endef
 ###
 
 GITHUB_SHA?=latest
-LOCAL_TAG=$(IMAGE):$(GITHUB_SHA)
+LOCAL_TAG=$(IMAGE)
 REMOTE_TAG=gcr.io/$(PROJECT_ID)/$(LOCAL_TAG)
 CONTAINER_NAME=$(IMAGE)
 
 build:
-	cd $(IMAGE) && docker build -t $(LOCAL_TAG) .
+	cd $(IMAGE) && docker build -t .
 
 push:
-	docker tag $(LOCAL_TAG) $(REMOTE_TAG)
+# docker tag $(LOCAL_TAG) $(REMOTE_TAG)
 	docker push $(REMOTE_TAG)
 
 deploy:
