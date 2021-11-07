@@ -1,0 +1,44 @@
+name: deploy-client
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'client/**'
+
+env:
+  IMAGE: client
+  GCP_PROJECT_ID: ticketing-devops-hamill
+  CLUSTER_NAME: ticketing
+  CLUSTER_ZONE: us-central1-a
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Set up and authenticate to gcloud
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          version: '360.0.0'
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }} 
+          project_id: ${{ env.GCP_PROJECT_ID }}
+      - name: Configure docker for GCP
+        run: gcloud --quiet auth configure-docker
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@main
+        with:
+          cluster_name: ${{ env.CLUSTER_NAME }}
+          location: ${{ env.CLUSTER_ZONE }}
+          credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      - name: Build
+        run: |-
+          make build
+      - name: Publish
+        run: |-
+          make push
+      - name: Deploy
+        run: |-
+          make deploy

@@ -1,0 +1,17 @@
+name: tests-auth
+
+on:
+  pull_request:
+    paths:
+      - 'auth/**'
+
+env:
+  SERVICE_NAME: auth
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: make tests
