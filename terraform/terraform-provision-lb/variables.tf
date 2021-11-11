@@ -19,3 +19,14 @@ variable gcp_machine_type {
 variable gcp_project_zone {
   type = string
 }
+
+### Cluster variables
+variable jwt_key {
+  type = string
+  sensitive = true
+}
+
+variable stripe_key {
+  type = string
+  sensitive = true
+}

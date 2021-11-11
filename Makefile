@@ -33,13 +33,22 @@ terraform-init: check-env
 
 TF_ACTION?=plan
 
-terraform-action: check-env
+terraform-cluster-action: check-env
 	cd terraform/terraform-provision-gcp-cluster && \
 		terraform workspace select $(ENV) && \
 		terraform $(TF_ACTION) \
 		-var-file="./environments/common.tfvars" \
 		-var-file="./environments/$(ENV)/config.tfvars" \
 		-var="cloudflare_api_token=$(call get-secret,cloudflare_api_token)"
+
+terraform-lb-action: check-env
+	cd terraform/terraform-provision-lb && \
+		terraform workspace select $(ENV) && \
+		terraform $(TF_ACTION) \
+		-var-file="./environments/common.tfvars" \
+		-var-file="./environments/$(ENV)/config.tfvars" \
+		-var="jwt_key=$(call get-secret,jwt_key)" \
+		-var="stripe_key=$(call get-secret,stripe_key)"
 
 # GITHUB_SHA?=latest
 LOCAL_TAG=$(IMAGE)

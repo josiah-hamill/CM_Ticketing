@@ -30,7 +30,7 @@ jobs:
         uses: google-github-actions/get-gke-credentials@main
         with:
           cluster_name: ${{ env.CLUSTER_NAME }}
-          location: ${{ ENV.CLUSTER_ZONE }}
+          location: ${{ env.CLUSTER_ZONE }}
           credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       # Install helm
       - name: Install Helm
@@ -41,4 +41,5 @@ jobs:
           helm upgrade ingress-srv-gcp ./infra/ingress-srv-gcp/ \
             --wait
           helm upgrade ticketing-cluster ./infra/ticketing-cluster/ \
+            --set JWT_KEY=${{ secrets.JWT_KEY }},STRIPE_KEY=${{ secrets.STRIPE_KEY }} \
             --wait
