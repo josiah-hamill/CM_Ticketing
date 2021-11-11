@@ -38,7 +38,7 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
       - name: Upgrade infrastructure and apply Helm charts
         run: |
-          chmod go-r ~/home/runner/work/CM_Ticketing/CM_Ticketing \
+          chmod go-r ~/home/runner/work/CM_Ticketing/CM_Ticketing
           helm upgrade ingress-srv-gcp ./infra/ingress-srv-gcp/ \
             --wait
           helm upgrade ticketing-cluster ./infra/ticketing-cluster/ \
