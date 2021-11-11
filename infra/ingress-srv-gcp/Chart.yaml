@@ -1,0 +1,3 @@
+apiVersion: v2
+name: ingress-srv-gcp
+version: 1.0.0

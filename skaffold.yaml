@@ -3,13 +3,13 @@ kind: Config
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/*
+      # - ./infra/k8s/*
       - ./infra/k8s-dev/*
 build:
   local:
     push: false
   artifacts:
-    - image: strategixllc/auth
+    - image: gcr.io/ticketing-devops-hamill/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -17,7 +17,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: strategixllc/client
+    - image: gcr.io/ticketing-devops-hamill/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -25,7 +25,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: strategixllc/tickets
+    - image: gcr.io/ticketing-devops-hamill/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -33,7 +33,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: strategixllc/orders
+    - image: gcr.io/ticketing-devops-hamill/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -41,7 +41,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: strategixllc/expiration
+    - image: gcr.io/ticketing-devops-hamill/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -49,7 +49,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: strategixllc/payments
+    - image: gcr.io/ticketing-devops-hamill/payments
       context: payments
       docker:
         dockerfile: Dockerfile
