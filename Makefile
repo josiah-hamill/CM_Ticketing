@@ -22,18 +22,29 @@ endef
 
 ###
 
-terraform-create-workspace: check-env
+ENV=prod
+
+terraform-create-cluster-workspace:
+	cd terraform/terraform-provision-gcp-cluster && \
+		terraform workspace new $(ENV)
+
+terraform-create-app-workspace:
 	cd terraform/terraform-provision-lb && \
 		terraform workspace new $(ENV)
 
-terraform-init: check-env
+terraform-cluster-init:
 	cd terraform/terraform-provision-gcp-cluster && \
+		terraform workspace select $(ENV) && \
+		terraform init
+
+terraform-app-init:
+	cd terraform/terraform-provision-lb && \
 		terraform workspace select $(ENV) && \
 		terraform init
 
 TF_ACTION?=plan
 
-terraform-cluster-action: check-env
+terraform-cluster-action:
 	cd terraform/terraform-provision-gcp-cluster && \
 		terraform workspace select $(ENV) && \
 		terraform $(TF_ACTION) \
@@ -41,7 +52,7 @@ terraform-cluster-action: check-env
 		-var-file="./environments/$(ENV)/config.tfvars" \
 		-var="cloudflare_api_token=$(call get-secret,cloudflare_api_token)"
 
-terraform-lb-action: check-env
+terraform-app-action:
 	cd terraform/terraform-provision-lb && \
 		terraform workspace select $(ENV) && \
 		terraform $(TF_ACTION) \
