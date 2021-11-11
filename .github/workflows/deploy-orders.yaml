@@ -10,8 +10,8 @@ on:
 env:
   IMAGE: orders
   GCP_PROJECT_ID: ticketing-devops-hamill
-  CLUSTER_NAME: ticketing
-  CLUSTER_ZONE: us-central1-a
+  CLUSTER_NAME: ticketing-staging
+  CLUSTER_ZONE: us-central1-c
 
 jobs:
   build-push-deploy:
