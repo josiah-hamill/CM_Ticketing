@@ -10,7 +10,7 @@ on:
 env:
   IMAGE: auth
   GCP_PROJECT_ID: ticketing-devops-hamill
-  CLUSTER_NAME: ticketing-staging
+  CLUSTER_NAME: ticketing
   CLUSTER_ZONE: us-central1-c
 
 jobs:

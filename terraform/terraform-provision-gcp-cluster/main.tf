@@ -23,7 +23,7 @@ provider "google" {
 }
 
 resource "google_container_cluster" "cluster" {
-  name     = "${var.app_name}-${terraform.workspace}"
+  name     = "${var.app_name}"
   location = "${var.gcp_project_zone}"
 
   remove_default_node_pool = true
@@ -31,7 +31,7 @@ resource "google_container_cluster" "cluster" {
 }
 
 resource "google_container_node_pool" "node-pool" {
-  name       = "${var.app_name}-node-pool-${terraform.workspace}"
+  name       = "${var.app_name}-node-pool"
   location   = "${var.gcp_project_zone}"
   cluster    = google_container_cluster.cluster.name
   node_count = 5
