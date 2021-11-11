@@ -40,5 +40,5 @@ jobs:
         run: |
           helm upgrade ingress-srv-gcp ./infra/ingress-srv-gcp/ \
             --wait
-          helm upgrade ticketing-staging ./infra/ticketing-cluster/ \
+          helm upgrade ticketing-cluster ./infra/ticketing-cluster/ \
             --wait
