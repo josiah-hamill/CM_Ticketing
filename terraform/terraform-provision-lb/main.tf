@@ -69,11 +69,11 @@ resource "helm_release" "ticketing-cluster" {
   name = "ticketing-cluster"
   chart = "../../infra/ticketing-cluster"
   timeout = 1800
-  set {
+  set_sensitive {
     name = "JWT_KEY"
     value = var.jwt_key
   }
-  set {
+  set_sensitive {
     name = "STRIPE_KEY"
     value = var.stripe_key
   }
