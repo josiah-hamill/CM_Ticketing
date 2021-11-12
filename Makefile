@@ -45,7 +45,7 @@ terraform-app-init:
 TF_ACTION?=plan
 
 terraform-cluster-action:
-	cd terraform/terraform-provision-gcp-cluster && \
+	@cd terraform/terraform-provision-gcp-cluster && \
 		terraform workspace select $(ENV) && \
 		terraform $(TF_ACTION) \
 		-var-file="./environments/common.tfvars" \
@@ -53,7 +53,7 @@ terraform-cluster-action:
 		-var="cloudflare_api_token=$(call get-secret,cloudflare_api_token)"
 
 terraform-app-action:
-	cd terraform/terraform-provision-lb && \
+	@cd terraform/terraform-provision-lb && \
 		terraform workspace select $(ENV) && \
 		terraform $(TF_ACTION) \
 		-var-file="./environments/common.tfvars" \
